@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Petición Coosalud</title>
+<meta name="description" content="Haz tu derecho de petición a la Fiscalía por los pagos de Coosalud en un casino y un prostíbulo durante la intervención, y envíalo directo al correo oficial de PQRS.">
+<meta name="theme-color" content="#d4001a">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Petición Coosalud — Exige respuestas a la Fiscalía">
+<meta property="og:description" content="Llena tus datos y envía en 2 minutos tu derecho de petición a la Fiscalía por los pagos de Coosalud en casino y prostíbulo.">
+<meta property="og:url" content="https://haroldco45.github.io/peticion-coosalud/">
+<meta property="og:image" content="https://haroldco45.github.io/peticion-coosalud/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Petición Coosalud — Exige respuestas a la Fiscalía">
+<meta name="twitter:description" content="Llena tus datos y envía en 2 minutos tu derecho de petición a la Fiscalía por los pagos de Coosalud en casino y prostíbulo.">
+<meta name="twitter:image" content="https://haroldco45.github.io/peticion-coosalud/og.jpg">
+
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@600;700;800&display=swap">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style>
+/* Layout: banda negra de titular, pasos 1-2-3 en una columna, vista previa tipo oficio al lado en pantallas anchas */
+:root{
+  --bg:#ffffff; --fg:#111111; --muted:#5b5557; --line:#e6e1e2; --soft:#f6f3f3;
+  --ink:#0d0d0d; --onink:#ffffff; --red:#d4001a; --redsoft:#fde8ea; --ok:#127a3a; --paper:#ffffff;
+  --display:"Barlow Condensed","Arial Narrow",Arial,sans-serif;
+  --body:"Barlow",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+  --mono:ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#121011; --fg:#f2eeef; --muted:#aaa2a4; --line:#2e2a2b; --soft:#1c191a;
+  --ink:#000000; --onink:#ffffff; --red:#ff3348; --redsoft:#3a1318; --ok:#4fd37f; --paper:#1a1718;
+  color-scheme:dark;}}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.5;-webkit-text-size-adjust:100%}
+a{color:var(--red)}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+
+/* Barra superior */
+.top{background:var(--ink);color:var(--onink);position:sticky;top:0;z-index:20;padding-top:env(safe-area-inset-top,0px)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:10px}
+.brand{font-family:var(--display);font-weight:800;letter-spacing:.06em;text-transform:uppercase;font-size:15px}
+.brand b{color:var(--red)}
+.lang{display:flex;border:1px solid #444;border-radius:999px;overflow:hidden}
+.lang button{background:none;border:0;color:#bbb;font:600 13px var(--body);padding:6px 12px;cursor:pointer}
+.lang button[aria-pressed="true"]{background:var(--red);color:#fff}
+
+/* Titular */
+.hero{background:var(--ink);color:var(--onink);position:relative;overflow:hidden}
+.hero .wrap{padding-block:34px 40px;position:relative;z-index:1}
+.ticker{display:flex;gap:28px;white-space:nowrap;font:700 12px var(--display);letter-spacing:.14em;text-transform:uppercase;color:#ff8a96;border-bottom:1px solid #2a2a2a;padding-block:8px;overflow:hidden}
+.ticker span{display:inline-block;animation:run 28s linear infinite}
+@keyframes run{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.kicker{display:inline-block;background:var(--red);color:#fff;font:700 12px var(--display);letter-spacing:.16em;text-transform:uppercase;padding:4px 10px;margin-bottom:14px}
+h1{font-family:var(--display);font-weight:800;font-size:clamp(38px,8vw,76px);line-height:.95;margin:0 0 14px;text-transform:uppercase;text-wrap:balance;max-width:16ch}
+h1 em{font-style:normal;color:var(--red)}
+.lead{font-size:clamp(16px,2.2vw,19px);color:#d8d2d3;max-width:60ch;margin:0}
+.figs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:#2a2a2a;margin-top:26px;border:1px solid #2a2a2a;max-width:720px}
+.fig{background:var(--ink);padding:12px 14px}
+.fig strong{display:block;font:800 clamp(22px,4vw,34px) var(--display);color:#fff;font-variant-numeric:tabular-nums}
+.fig small{color:#aaa;font-size:12.5px;line-height:1.3;display:block}
+.stripe{height:6px;background:repeating-linear-gradient(90deg,var(--red) 0 40px,var(--ink) 40px 48px)}
+
+/* Cuerpo */
+main .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:32px;padding-block:32px 48px;align-items:start}
+@media (max-width:900px){main .wrap{grid-template-columns:minmax(0,1fr)}}
+.step{border-top:3px solid var(--fg);padding-top:14px;margin-bottom:30px}
+.step h2{font:800 26px/1.05 var(--display);text-transform:uppercase;margin:0 0 4px;display:flex;gap:10px;align-items:baseline}
+.step h2 .n{color:var(--red);font-variant-numeric:tabular-nums}
+.step p.help{color:var(--muted);margin:0 0 16px;font-size:15px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 14px}
+@media (max-width:520px){.grid{grid-template-columns:minmax(0,1fr)}}
+.full{grid-column:1/-1}
+label{display:block;font:600 13px var(--body);letter-spacing:.04em;text-transform:uppercase;color:var(--muted);margin-bottom:5px}
+input,textarea,select{width:100%;font:500 16px var(--body);color:var(--fg);background:var(--soft);border:1.5px solid var(--line);border-radius:6px;padding:11px 12px;transition:border-color .15s,background .15s}
+input:focus,textarea:focus,select:focus{outline:none;border-color:var(--red);background:var(--bg)}
+input.bad{border-color:var(--red);background:var(--redsoft)}
+textarea{min-height:96px;resize:vertical}
+.chk{display:flex;gap:10px;align-items:flex-start;font-size:14.5px;color:var(--fg);text-transform:none;letter-spacing:0;font-weight:500}
+.chk input{width:20px;height:20px;flex:none;margin-top:2px;accent-color:var(--red)}
+.asks{display:grid;gap:8px}
+.ask{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border:1.5px solid var(--line);border-radius:6px;cursor:pointer;font-size:15px;text-transform:none;letter-spacing:0;font-weight:500;color:var(--fg);margin:0}
+.ask:has(input:checked){border-color:var(--red);background:var(--redsoft)}
+.ask input{width:20px;height:20px;flex:none;margin-top:2px;accent-color:var(--red)}
+
+.btns{display:grid;gap:10px}
+.btn{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;text-align:left;text-decoration:none;font:700 18px var(--display);letter-spacing:.04em;text-transform:uppercase;padding:15px 18px;border-radius:6px;border:2px solid var(--fg);background:var(--bg);color:var(--fg);cursor:pointer;transition:transform .12s,background .15s,color .15s}
+.btn small{display:block;font:500 13px var(--body);letter-spacing:0;text-transform:none;color:var(--muted);margin-top:2px}
+.btn .arr{font-family:var(--display);font-size:22px}
+.btn:hover{transform:translateY(-2px)}
+.btn:focus-visible{outline:3px solid var(--red);outline-offset:2px}
+.btn.primary{background:var(--red);border-color:var(--red);color:#fff}
+.btn.primary small{color:#ffe1e4}
+.btn[disabled]{opacity:.45;cursor:not-allowed;transform:none}
+.mailbox{margin-top:14px;padding:12px 14px;background:var(--soft);border-left:4px solid var(--red);font-size:14.5px}
+.mailbox code{font-family:var(--mono);font-size:14px;word-break:break-all}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%) translateY(120px);background:var(--fg);color:var(--bg);padding:12px 18px;border-radius:6px;font-weight:600;transition:transform .25s;z-index:50;max-width:calc(100% - 32px)}
+.toast.show{transform:translateX(-50%) translateY(0)}
+
+/* Oficio */
+.side{position:sticky;top:70px}
+@media (max-width:900px){.side{position:static}}
+.sheet-head{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:8px}
+.sheet-head h2{font:800 22px var(--display);text-transform:uppercase;margin:0}
+.live{font:700 12px var(--display);letter-spacing:.14em;text-transform:uppercase;color:var(--red);display:flex;align-items:center;gap:6px}
+.live i{width:8px;height:8px;border-radius:50%;background:var(--red);animation:blink 1.4s infinite}
+@keyframes blink{50%{opacity:.25}}
+.sheet{background:var(--paper);border:1px solid var(--line);box-shadow:0 18px 40px -24px rgba(0,0,0,.35);padding:28px 26px;max-height:78vh;overflow:auto;font-family:Georgia,"Times New Roman",serif;font-size:14.5px;line-height:1.6;white-space:pre-wrap;word-wrap:break-word}
+.sheet mark{background:var(--redsoft);color:var(--red);padding:0 3px;font-family:var(--body);font-weight:600}
+.howto{margin-top:30px}
+.howto ol{padding-left:20px;margin:8px 0 0}
+.howto li{margin-bottom:6px}
+.note{font-size:14px;color:var(--muted);margin-top:10px}
+
+footer{background:var(--ink);color:#bbb;font-size:13.5px}
+footer .wrap{padding-block:26px calc(26px + env(safe-area-inset-bottom,0px));display:grid;gap:8px}
+footer strong{color:#fff}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <div class="brand">Vibras Positivas <b>HM</b></div>
+    <div class="lang" role="group" aria-label="Idioma">
+      <button id="l-es" aria-pressed="true">ES</button>
+      <button id="l-en" aria-pressed="false">EN</button>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="ticker" aria-hidden="true"><span data-i="ticker"></span><span data-i="ticker"></span></div>
+  <div class="wrap">
+    <span class="kicker" data-i="kicker">Derecho de petición · Artículo 23 de la Constitución</span>
+    <h1 data-i="h1" data-html>Casino y prostíbulo con plata de <em>Coosalud</em>. Exige respuestas.</h1>
+    <p class="lead" data-i="lead">Llena tus datos, la app arma tu derecho de petición y lo envías directo al correo oficial de PQRS de la Fiscalía General de la Nación. La Fiscalía tiene 15 días hábiles para responderte.</p>
+    <div class="figs">
+      <div class="fig"><strong>$5.000.000</strong><small data-i="f1">Pagos en el Texas Luxury Casino, Cartagena (23 sep 2025)</small></div>
+      <div class="fig"><strong>$800.000</strong><small data-i="f2">Pagos en El Paraíso del Marino, señalado como prostíbulo (28 nov 2025)</small></div>
+      <div class="fig"><strong>$56.000.000</strong><small data-i="f3">Retiros en efectivo entre agosto y diciembre de 2025</small></div>
+    </div>
+  </div>
+</section>
+<div class="stripe"></div>
+
+<main>
+  <div class="wrap">
+    <div>
+      <form id="f" novalidate>
+        <section class="step">
+          <h2><span class="n">1</span><span data-i="s1">Tus datos</span></h2>
+          <p class="help" data-i="s1h">Son los datos que exige la Ley 1755 de 2015 para que la Fiscalía te pueda responder.</p>
+          <div class="grid">
+            <div class="full"><label for="nombre" data-i="nombre">Nombre completo</label><input id="nombre" autocomplete="name" required></div>
+            <div><label for="cedula" data-i="cedula">Cédula</label><input id="cedula" inputmode="numeric" required></div>
+            <div><label for="expedida" data-i="expedida">Expedida en</label><input id="expedida"></div>
+            <div><label for="ciudad" data-i="ciudad">Ciudad / municipio</label><input id="ciudad" autocomplete="address-level2" required></div>
+            <div><label for="depto" data-i="depto">Departamento</label><input id="depto" autocomplete="address-level1"></div>
+            <div class="full"><label for="direccion" data-i="direccion">Dirección</label><input id="direccion" autocomplete="street-address"></div>
+            <div><label for="correo" data-i="correo">Correo para la respuesta</label><input id="correo" type="email" autocomplete="email" required></div>
+            <div><label for="celular" data-i="celular">Celular</label><input id="celular" type="tel" inputmode="tel" autocomplete="tel"></div>
+          </div>
+        </section>
+
+        <section class="step">
+          <h2><span class="n">2</span><span data-i="s2">Qué le pides a la Fiscalía</span></h2>
+          <p class="help" data-i="s2h">Vienen todas marcadas. Quita las que no quieras.</p>
+          <div class="asks" id="asks"></div>
+          <div style="margin-top:14px">
+            <label for="extra" data-i="extra">Algo más que quieras decir (opcional)</label>
+            <textarea id="extra" data-ph="extraph" placeholder="Por ejemplo: soy afiliado a Coosalud en Caucasia y me preocupa…"></textarea>
+          </div>
+        </section>
+
+        <section class="step">
+          <h2><span class="n">3</span><span data-i="s3">Envíala a la Fiscalía</span></h2>
+          <label class="chk" for="acepto"><input type="checkbox" id="acepto"><span data-i="acepto">Autorizo el uso de mis datos solo para generar esta petición. La app no guarda ni envía tus datos a ningún servidor: todo queda en tu celular (Ley 1581 de 2012).</span></label>
+          <div class="btns" style="margin-top:16px">
+            <a class="btn primary" id="b-mail" href="#"><span><span data-i="bmail">Enviar al correo de la Fiscalía</span><small data-i="bmails">Se abre tu correo con todo listo. Solo toca Enviar.</small></span><span class="arr">→</span></a>
+            <a class="btn" id="b-gmail" href="#" target="_blank" rel="noopener"><span><span data-i="bgmail">Enviar con Gmail</span><small data-i="bgmails">Si el botón de arriba no abre tu correo.</small></span><span class="arr">→</span></a>
+            <button class="btn" type="button" id="b-pdf"><span><span data-i="bpdf">Descargar en PDF</span><small data-i="bpdfs">Para adjuntarlo en el formulario web de la Fiscalía.</small></span><span class="arr">↓</span></button>
+            <button class="btn" type="button" id="b-copy"><span><span data-i="bcopy">Copiar el texto</span><small data-i="bcopys">Para pegarlo donde quieras.</small></span><span class="arr">⧉</span></button>
+          </div>
+          <div class="mailbox">
+            <span data-i="destino">Destino oficial de PQRS de la Fiscalía General de la Nación:</span><br>
+            <code id="dest">ges.documentalpqrs@fiscalia.gov.co</code>
+          </div>
+        </section>
+      </form>
+
+      <section class="howto">
+        <div class="step" style="margin-bottom:0">
+          <h2><span data-i="desp">Después de enviarla</span></h2>
+          <ol>
+            <li data-i="d1">La Fiscalía te responde al correo con un número de radicado. Guárdalo.</li>
+            <li data-i="d2" data-html>Puedes consultar el trámite en <a href="https://arkivapqrs.fiscalia.gov.co/home" target="_blank" rel="noopener">arkivapqrs.fiscalia.gov.co</a>.</li>
+            <li data-i="d3">Si pasan 15 días hábiles sin respuesta de fondo, puedes presentar una acción de tutela.</li>
+            <li data-i="d4" data-html>¿Prefieres el formulario web? Descarga el PDF y radícalo en <a href="https://www.fiscalia.gov.co/colombia/servicios-de-informacion-al-ciudadano/buzon-de-quejas-y-reclamos/" target="_blank" rel="noopener">el buzón de PQRS de la Fiscalía</a>, opción «Petición de interés general».</li>
+          </ol>
+          <p class="note" data-i="nota">Los hechos se citan tal como los publicaron Cambio, Portafolio, La FM y otros medios el 25 y 26 de octubre de 2026. No hay todavía una decisión judicial sobre estos pagos.</p>
+          <a class="btn" style="margin-top:14px" id="b-wa" href="#" target="_blank" rel="noopener"><span><span data-i="bwa">Compartir la app por WhatsApp</span><small data-i="bwas">Entre más peticiones lleguen, más presión.</small></span><span class="arr">→</span></a>
+        </div>
+      </section>
+    </div>
+
+    <aside class="side">
+      <div class="sheet-head"><h2 data-i="prev">Tu petición</h2><span class="live"><i></i><span data-i="vivo">Se arma en vivo</span></span></div>
+      <div class="sheet" id="sheet" aria-live="polite"></div>
+      <p class="note" data-i="esp">El texto de la petición va en español porque la Fiscalía es una autoridad colombiana.</p>
+    </aside>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div><strong>Desarrollada por Vibras Positivas HM — Derechos de Autor Reservados</strong></div>
+    <div data-i="pie">Herramienta ciudadana gratuita. No es asesoría jurídica ni representa a ninguna entidad pública. Caucasia, Antioquia.</div>
+  </div>
+</footer>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+(function(){
+"use strict";
+var DEST = "ges.documentalpqrs@fiscalia.gov.co";
+var APP_URL = "https://haroldco45.github.io/peticion-coosalud/";
+var $ = function(id){return document.getElementById(id);};
+
+/* ---------- Textos de la interfaz ES / EN ---------- */
+var T = {
+ es:{
+  ticker:"Casino en Cartagena · Prostíbulo en Vista Hermosa · Retiros en efectivo · Contratos con conflicto de interés · Exigimos respuestas · ",
+  kicker:"Derecho de petición · Artículo 23 de la Constitución",
+  h1:"Casino y prostíbulo con plata de <em>Coosalud</em>. Exige respuestas.",
+  lead:"Llena tus datos, la app arma tu derecho de petición y lo envías directo al correo oficial de PQRS de la Fiscalía General de la Nación. La Fiscalía tiene 15 días hábiles para responderte.",
+  f1:"Pagos en el Texas Luxury Casino, Cartagena (23 sep 2025)",
+  f2:"Pagos en El Paraíso del Marino, señalado como prostíbulo (28 nov 2025)",
+  f3:"Retiros en efectivo entre agosto y diciembre de 2025",
+  s1:"Tus datos", s1h:"Son los datos que exige la Ley 1755 de 2015 para que la Fiscalía te pueda responder.",
+  nombre:"Nombre completo", cedula:"Cédula", expedida:"Expedida en", ciudad:"Ciudad / municipio", depto:"Departamento", direccion:"Dirección", correo:"Correo para la respuesta", celular:"Celular",
+  s2:"Qué le pides a la Fiscalía", s2h:"Vienen todas marcadas. Quita las que no quieras.",
+  extra:"Algo más que quieras decir (opcional)", extraph:"Por ejemplo: soy afiliado a Coosalud en Caucasia y me preocupa…",
+  s3:"Envíala a la Fiscalía",
+  acepto:"Autorizo el uso de mis datos solo para generar esta petición. La app no guarda ni envía tus datos a ningún servidor: todo queda en tu celular (Ley 1581 de 2012).",
+  bmail:"Enviar al correo de la Fiscalía", bmails:"Se abre tu correo con todo listo. Solo toca Enviar.",
+  bgmail:"Enviar con Gmail", bgmails:"Si el botón de arriba no abre tu correo.",
+  bpdf:"Descargar en PDF", bpdfs:"Para adjuntarlo en el formulario web de la Fiscalía.",
+  bcopy:"Copiar el texto", bcopys:"Para pegarlo donde quieras.",
+  destino:"Destino oficial de PQRS de la Fiscalía General de la Nación:",
+  desp:"Después de enviarla",
+  d1:"La Fiscalía te responde al correo con un número de radicado. Guárdalo.",
+  d2:'Puedes consultar el trámite en <a href="https://arkivapqrs.fiscalia.gov.co/home" target="_blank" rel="noopener">arkivapqrs.fiscalia.gov.co</a>.',
+  d3:"Si pasan 15 días hábiles sin respuesta de fondo, puedes presentar una acción de tutela.",
+  d4:'¿Prefieres el formulario web? Descarga el PDF y radícalo en <a href="https://www.fiscalia.gov.co/colombia/servicios-de-informacion-al-ciudadano/buzon-de-quejas-y-reclamos/" target="_blank" rel="noopener">el buzón de PQRS de la Fiscalía</a>, opción «Petición de interés general».',
+  nota:"Los hechos se citan tal como los publicaron Cambio, Portafolio, La FM y otros medios el 25 y 26 de octubre de 2026. No hay todavía una decisión judicial sobre estos pagos.",
+  bwa:"Compartir la app por WhatsApp", bwas:"Entre más peticiones lleguen, más presión.",
+  prev:"Tu petición", vivo:"Se arma en vivo",
+  esp:"El texto de la petición va en español porque la Fiscalía es una autoridad colombiana.",
+  pie:"Herramienta ciudadana gratuita. No es asesoría jurídica ni representa a ninguna entidad pública. Caucasia, Antioquia.",
+  faltan:"Te falta: ", ok:"Listo. Revisa tu correo y toca Enviar.", copied:"Texto copiado", pdfok:"PDF descargado", acept:"Marca la autorización de datos",
+  wa:"Yo ya le exigí respuestas a la Fiscalía por los pagos de Coosalud en casino y prostíbulo. Haz tu derecho de petición en 2 minutos: "
+ },
+ en:{
+  ticker:"Casino in Cartagena · Brothel in Vista Hermosa · Cash withdrawals · Conflict-of-interest contracts · We demand answers · ",
+  kicker:"Right of petition · Article 23 of the Colombian Constitution",
+  h1:"Casino and brothel paid with <em>Coosalud</em> money. Demand answers.",
+  lead:"Fill in your details, the app drafts your petition and you send it straight to the official complaints inbox of Colombia's Attorney General's Office. They have 15 business days to reply.",
+  f1:"Payments at Texas Luxury Casino, Cartagena (Sep 23, 2025)",
+  f2:"Payments at El Paraíso del Marino, reported as a brothel (Nov 28, 2025)",
+  f3:"Cash withdrawals between August and December 2025",
+  s1:"Your details", s1h:"Law 1755 of 2015 requires these so the Attorney General's Office can reply to you.",
+  nombre:"Full name", cedula:"ID number (cédula)", expedida:"Issued in", ciudad:"City / town", depto:"Department / state", direccion:"Address", correo:"Email for the reply", celular:"Mobile",
+  s2:"What you ask the Attorney General's Office", s2h:"All are checked. Uncheck any you don't want.",
+  extra:"Anything else you want to say (optional, in Spanish)", extraph:"For example: I live abroad and my family is covered by Coosalud…",
+  s3:"Send it",
+  acepto:"I authorize the use of my data only to create this petition. The app does not store or send your data to any server; everything stays on your phone (Law 1581 of 2012).",
+  bmail:"Send to the Attorney General's email", bmails:"Your email app opens with everything ready. Just tap Send.",
+  bgmail:"Send with Gmail", bgmails:"If the button above doesn't open your email.",
+  bpdf:"Download as PDF", bpdfs:"To attach it on the Attorney General's web form.",
+  bcopy:"Copy the text", bcopys:"To paste it anywhere.",
+  destino:"Official complaints inbox of Colombia's Attorney General's Office:",
+  desp:"After you send it",
+  d1:"You'll get a reply by email with a filing number. Keep it.",
+  d2:'Track it at <a href="https://arkivapqrs.fiscalia.gov.co/home" target="_blank" rel="noopener">arkivapqrs.fiscalia.gov.co</a>.',
+  d3:"If 15 business days pass with no substantive answer, you can file a tutela (constitutional action).",
+  d4:'Prefer the web form? Download the PDF and file it at <a href="https://www.fiscalia.gov.co/colombia/servicios-de-informacion-al-ciudadano/buzon-de-quejas-y-reclamos/" target="_blank" rel="noopener">the Attorney General\'s complaints inbox</a>, option "Petición de interés general".',
+  nota:"Facts are cited as published by Cambio, Portafolio, La FM and other outlets on October 25–26, 2026. There is no court ruling on these payments yet.",
+  bwa:"Share the app on WhatsApp", bwas:"The more petitions arrive, the more pressure.",
+  prev:"Your petition", vivo:"Drafted live",
+  esp:"The petition text stays in Spanish because it goes to a Colombian authority.",
+  pie:"Free civic tool. Not legal advice and not affiliated with any public entity. Caucasia, Antioquia.",
+  faltan:"Missing: ", ok:"Done. Check your email app and tap Send.", copied:"Text copied", pdfok:"PDF downloaded", acept:"Check the data authorization box",
+  wa:"I demanded answers from Colombia's Attorney General about Coosalud payments at a casino and a brothel. File your petition in 2 minutes: "
+ }
+};
+
+/* Peticiones (siempre en español en el oficio) con su etiqueta en EN */
+var ASKS = [
+ {es:"Informar si la Fiscalía General de la Nación ha recibido denuncias o noticias criminales por los pagos con tarjetas corporativas de Inversiones Portichelly en el Texas Luxury Casino y en El Paraíso del Marino (Cartagena), y por los retiros en efectivo de agosto a diciembre de 2025.",
+  en:"Whether complaints have been filed over the casino and brothel payments and the cash withdrawals"},
+ {es:"En caso afirmativo, informar el número de noticia criminal (SPOA), la fecha de recibo, la dirección o seccional y el despacho asignado, y la etapa general en que se encuentra, sin revelar información sujeta a reserva legal.",
+  en:"If so, the case number, assigned office and general stage"},
+ {es:"En caso negativo, informar si la Fiscalía abrirá investigación de oficio con base en las publicaciones de prensa citadas, que constituyen hechos de público conocimiento.",
+  en:"If not, whether it will open an investigation on its own initiative"},
+ {es:"Informar si existen investigaciones penales abiertas por el manejo de recursos de Coosalud EPS y de la Cooperativa Coosalud durante el periodo de intervención estatal (desde el 22 de noviembre de 2024), incluidos los contratos de obra señalados por presunto conflicto de interés, y en qué etapa general se encuentran.",
+  en:"Whether there are criminal investigations into Coosalud's funds during state intervention"},
+ {es:"Informar qué medidas ha adoptado o adoptará la Fiscalía para asegurar los elementos materiales probatorios, en particular los extractos bancarios y los soportes de gastos de las empresas del grupo Coosalud.",
+  en:"What it is doing to secure the evidence (bank statements, expense records)"}
+];
+
+var lang = "es";
+try{ var sv = localStorage.getItem("pc-lang"); if(sv==="en"||sv==="es") lang = sv; }catch(e){}
+
+function paintLang(){
+  document.documentElement.lang = lang;
+  $("l-es").setAttribute("aria-pressed", lang==="es");
+  $("l-en").setAttribute("aria-pressed", lang==="en");
+  document.querySelectorAll("[data-i]").forEach(function(el){
+    var k = el.getAttribute("data-i"), v = T[lang][k];
+    if(v==null) return;
+    if(el.hasAttribute("data-html")) el.innerHTML = v; else el.textContent = v;
+  });
+  document.querySelectorAll("[data-ph]").forEach(function(el){ el.placeholder = T[lang][el.getAttribute("data-ph")]; });
+  document.querySelectorAll(".ask .lbl").forEach(function(el,i){ el.textContent = lang==="es" ? ASKS[i].es : ASKS[i].en; });
+  render();
+}
+$("l-es").onclick = function(){ lang="es"; try{localStorage.setItem("pc-lang","es");}catch(e){} paintLang(); };
+$("l-en").onclick = function(){ lang="en"; try{localStorage.setItem("pc-lang","en");}catch(e){} paintLang(); };
+
+/* Casillas de peticiones */
+var asksBox = $("asks");
+ASKS.forEach(function(a,i){
+  var l = document.createElement("label"); l.className="ask"; l.htmlFor="ask"+i;
+  l.innerHTML = '<input type="checkbox" id="ask'+i+'" checked><span class="lbl"></span>';
+  asksBox.appendChild(l);
+});
+
+/* Fecha real de Colombia */
+function fechaCO(){
+  try{
+    return new Intl.DateTimeFormat("es-CO",{timeZone:"America/Bogota",day:"numeric",month:"long",year:"numeric"}).format(new Date());
+  }catch(e){ return new Date().toLocaleDateString("es-CO"); }
+}
+
+var F = ["nombre","cedula","expedida","ciudad","depto","direccion","correo","celular","extra"];
+function val(id){ return ($(id).value||"").trim(); }
+function v(id,ph){ var x = val(id); return x || ("["+ph+"]"); }
+
+var ASUNTO = "Derecho de petición de interés general - Pagos de empresa del grupo Coosalud en casino y prostíbulo durante la intervención";
+
+function texto(){
+  var lugar = val("ciudad") ? val("ciudad") + (val("depto")? ", "+val("depto"):"") : "[CIUDAD]";
+  var pet = []; ASKS.forEach(function(a,i){ if($("ask"+i).checked) pet.push(a.es); });
+  pet.push("Si alguna información solicitada está sujeta a reserva, indicarlo por escrito citando la norma legal que la fundamenta, conforme al artículo 25 de la Ley 1437 de 2011 (sustituido por la Ley 1755 de 2015), y entregar la parte de la información que no lo esté.");
+  var s = "";
+  s += lugar + ", " + fechaCO() + "\n\n";
+  s += "Señor(a)\nFISCAL GENERAL DE LA NACIÓN\nFiscalía General de la Nación\nDirección de Atención al Usuario, Intervención Temprana y Asignaciones\nBogotá D.C.\n\n";
+  s += "Asunto: " + ASUNTO + ".\n\n";
+  s += "Yo, " + v("nombre","NOMBRE COMPLETO") + ", identificado(a) con cédula de ciudadanía No. " + v("cedula","CÉDULA") + (val("expedida")? " de "+val("expedida") : "") + ", residente en " + lugar + ", en ejercicio del derecho fundamental de petición consagrado en el artículo 23 de la Constitución Política y regulado por la Ley 1755 de 2015, me dirijo respetuosamente a su despacho con base en los siguientes:\n\n";
+  s += "HECHOS\n\n";
+  s += "1. El 22 de noviembre de 2024 la Superintendencia Nacional de Salud ordenó la toma de posesión e intervención forzosa administrativa de Coosalud EPS S.A. La Cooperativa Coosalud, su accionista principal, fue intervenida por la Superintendencia de la Economía Solidaria.\n\n";
+  s += "2. El 25 de octubre de 2026 la revista Cambio publicó, con base en extractos bancarios, que Inversiones Portichelly, empresa del grupo de la Cooperativa Coosalud, registró pagos con tarjeta corporativa mientras la cooperativa estaba bajo administración de agentes interventores.\n\n";
+  s += "3. Según esos reportes, el 23 de septiembre de 2025 se hicieron cuatro pagos por $5.000.000 en el Texas Luxury Casino de Cartagena; el 28 de noviembre de 2025, dos pagos por $800.000 en el establecimiento El Paraíso del Marino, señalado como prostíbulo; y entre agosto y diciembre de 2025, retiros en efectivo por $56.000.000.\n\n";
+  s += "4. Los medios también reportan contratos de obra por $972.000.000 suscritos en aparente conflicto de interés durante la misma administración.\n\n";
+  s += "5. La exsuperintendente de la Economía Solidaria afirmó públicamente que esos pagos no corresponden a recursos de la salud y que ya habían sido denunciados. Coosalud EPS pidió que las autoridades competentes investiguen y determinen responsabilidades.\n\n";
+  s += "6. Coosalud atiende a cerca de 3 millones de afiliados. La ciudadanía tiene interés legítimo en saber si se investiga el uso de los recursos de las entidades intervenidas por el Estado. No existe todavía decisión judicial sobre estos movimientos; los hechos se citan tal como fueron publicados.\n\n";
+  if(val("extra")) s += "7. " + val("extra") + "\n\n";
+  s += "PETICIONES\n\n";
+  pet.forEach(function(p,i){ s += (i+1) + ". " + p + "\n\n"; });
+  s += "FUNDAMENTOS DE DERECHO\n\nArtículos 23, 74 y 250 de la Constitución Política; Ley 1755 de 2015 (términos de 15 días hábiles para peticiones y 10 días hábiles para solicitudes de información); Ley 1712 de 2014 de Transparencia y Acceso a la Información Pública; artículo 66 de la Ley 906 de 2004.\n\n";
+  s += "NOTIFICACIONES\n\nRecibiré respuesta en:\nCorreo electrónico: " + v("correo","CORREO") + "\n";
+  if(val("direccion")) s += "Dirección: " + val("direccion") + ", " + lugar + "\n";
+  if(val("celular")) s += "Celular: " + val("celular") + "\n";
+  s += "\nAtentamente,\n\n\n" + v("nombre","NOMBRE COMPLETO") + "\nC.C. " + v("cedula","CÉDULA") + (val("expedida")? " de "+val("expedida"):"") + "\n\n";
+  s += "Fuentes de los hechos: revista Cambio (25 oct 2026); Portafolio, La FM, El Universal, Revista Metro y Opanoticias (25-26 oct 2026).";
+  return s;
+}
+
+function esc(t){ return t.replace(/[&<>]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;"}[c];}); }
+function render(){
+  $("sheet").innerHTML = esc(texto()).replace(/\[([A-ZÁÉÍÓÚÑ ]+)\]/g,"<mark>$1</mark>");
+  var body = texto();
+  $("b-mail").href = "mailto:" + DEST + "?subject=" + encodeURIComponent(ASUNTO) + "&body=" + encodeURIComponent(body);
+  $("b-gmail").href = "https://mail.google.com/mail/?view=cm&fs=1&to=" + encodeURIComponent(DEST) + "&su=" + encodeURIComponent(ASUNTO) + "&body=" + encodeURIComponent(body);
+  $("b-wa").href = "https://wa.me/?text=" + encodeURIComponent(T[lang].wa + APP_URL);
+}
+
+/* Validación */
+var REQ = [["nombre","nombre"],["cedula","cedula"],["ciudad","ciudad"],["correo","correo"]];
+function valido(){
+  var falta = [];
+  REQ.forEach(function(r){
+    var el = $(r[0]), bad = !el.value.trim() || (r[0]==="correo" && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(el.value.trim()));
+    el.classList.toggle("bad", bad);
+    if(bad) falta.push(T[lang][r[1]]);
+  });
+  if(falta.length){ toast(T[lang].faltan + falta.join(", ")); $(REQ.filter(function(r){return $(r[0]).classList.contains("bad");})[0][0]).focus(); return false; }
+  if(!$("acepto").checked){ toast(T[lang].acept); $("acepto").focus(); return false; }
+  return true;
+}
+var tt;
+function toast(m){ var t=$("toast"); t.textContent=m; t.classList.add("show"); clearTimeout(tt); tt=setTimeout(function(){t.classList.remove("show");},3200); }
+
+$("b-mail").addEventListener("click",function(e){ if(!valido()){ e.preventDefault(); return; } render(); setTimeout(function(){toast(T[lang].ok);},400); });
+$("b-gmail").addEventListener("click",function(e){ if(!valido()){ e.preventDefault(); return; } render(); });
+$("b-copy").addEventListener("click",function(){
+  if(!valido()) return;
+  var s = "Para: " + DEST + "\nAsunto: " + ASUNTO + "\n\n" + texto();
+  var fallback = function(){ var r=document.createRange(); r.selectNodeContents($("sheet")); var sel=getSelection(); sel.removeAllRanges(); sel.addRange(r); };
+  if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(s).then(function(){toast(T[lang].copied);},fallback); } else fallback();
+});
+$("b-pdf").addEventListener("click",function(){
+  if(!valido()) return;
+  if(!window.jspdf){ toast("PDF no disponible sin internet"); return; }
+  var doc = new window.jspdf.jsPDF({unit:"mm",format:"letter"});
+  var W = 216, M = 22, y = 22, lh = 5.4;
+  doc.setFont("times","normal"); doc.setFontSize(11.5);
+  texto().split("\n").forEach(function(line){
+    var bold = /^(HECHOS|PETICIONES|FUNDAMENTOS DE DERECHO|NOTIFICACIONES|FISCAL GENERAL DE LA NACIÓN)$/.test(line) || line.indexOf("Asunto:")===0;
+    doc.setFont("times", bold?"bold":"normal");
+    var parts = line ? doc.splitTextToSize(line, W-2*M) : [""];
+    parts.forEach(function(p){ if(y > 262){ doc.addPage(); y = 22; } doc.text(p, M, y); y += lh; });
+  });
+  var n = (val("nombre")||"peticion").normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/[^A-Za-z0-9]+/g,"-");
+  doc.save("Derecho-de-peticion-Fiscalia-Coosalud-" + n + ".pdf");
+  toast(T[lang].pdfok);
+});
+
+/* Borrador en el celular */
+F.forEach(function(id){
+  try{ var x = localStorage.getItem("pc-"+id); if(x) $(id).value = x; }catch(e){}
+  $(id).addEventListener("input",function(){ this.classList.remove("bad"); try{localStorage.setItem("pc-"+id,this.value);}catch(e){} render(); });
+});
+asksBox.addEventListener("change",render);
+
+paintLang();
+
+if("serviceWorker" in navigator){ window.addEventListener("load",function(){ navigator.serviceWorker.register("sw.js").catch(function(){}); }); }
+})();
+</script>
+</body>
+</html>
